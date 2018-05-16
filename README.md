@@ -61,12 +61,16 @@ Recrutement des nounous :
   * planning créneau réservé
     * ID clé étrangère
     * heure/date début
-    * heure/date fin
+    * nb de créneau de 30min
     * Ponctuel régulière étrangère
     * Information enfant
   * Planning dispo
     * ID
-    
+    * jour en anglais ou date si non renouvelable
+    * heure de début
+    * Type de prestation
+    * nbTps
+    * // Tache cron qui supprime les dates passé chaque semaine
   * Info nounou
     * ID
     * Nom
@@ -84,6 +88,9 @@ Recrutement des nounous :
     * ID
     * Note 
     * Avis
+  * salaire :
+    * ID 
+    * revenu
 * bdd pour compte : 
   * Nounou
     * Users --> utilisé comme clé étrangère* mdp 
@@ -91,6 +98,23 @@ Recrutement des nounous :
   * Parent 
     * Users --> utilisé comme clé étrangère
     * mdp
+    
+## Sitemap
+
+* index
+  * nounou
+    * connection + php pour la vérifier la connexion
+    * creation + php pour vérifier la création
+    * planning + php dans la page pour créer le calendrier avec les dates + AJAX pour les événements
+    * creationplanning + formulaire --> ajouter des heures / retirer des heures ?
+    * profil + php pour remplir tout le profil et enregistrer les nouvelles infos modifié
+  * parent
+    * connection + php pour la vérifier la connexion / si la connexion passe redirigé vers le calendrier
+    * creation + php pour vérifier la création  / si création OK redirigé vers enregistrementprofil
+    * enregistrementprofil : formulaire
+    * profil + php pour remplir tout le profil et enregistrer les nouvelles infos modifié et nounou prisent
+    * recherche
+    * nounou + php pour mettre en forme dynamiquement le profil de la nounou
   
   
 
