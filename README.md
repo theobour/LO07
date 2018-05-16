@@ -2,8 +2,9 @@
 Projet LO07 Nounou
 
 ## Sommaire
-1. [Base de données](#Objectifs)
+1. [Objectifs](#Objectifs)
 1. [Fonctionnalité Admin](#fonctionnalité--admin]
+1. [Fonctionnalité Nounou](#fonctionnalité--nounou]
 1. [Fonctionnalité Parent](#fonctionnalité--parent]
 1. [Base de donnée](#base-de-donnée-)
 
