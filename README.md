@@ -45,19 +45,19 @@ Recrutement des nounous :
 
 * Parent :
   * ID
-  * Nom de famille
-  * Ville
-  * Email
+  * nom
+  * ville
+  * email
 * Enfant :
   * ID
-  * Prénom
-  * date de naissance
-  * Restriction alimentaire
-  * Information général
+  * prenom
+  * date
+  * alimentation
+  * info
 * Nounou :
   * langue
     * ID clé étrangère
-    * Langue
+    * langue
   * planning créneau réservé
     * ID clé étrangère
     * heure/date début
@@ -73,17 +73,16 @@ Recrutement des nounous :
     * // Tache cron qui supprime les dates passé chaque semaine
   * Info nounou
     * ID
-    * Nom
-    * Prénom
-    * Ville
-    * Email
-    * Portable
-    * Liste des langues parlées
-    * Une photo
-    * Age
-    * Expérience
-    * Une phrase de présentation
-    * Liste des évaluations effectuées par les parents
+    * nom
+    * prenom
+    * ville
+    * email
+    * portable
+    * langue
+    * photo
+    * age
+    * expérience
+    * presentation
   * Evalution :
     * ID
     * Note 
@@ -93,10 +92,11 @@ Recrutement des nounous :
     * revenu
 * bdd pour compte : 
   * Nounou
-    * Users --> utilisé comme clé étrangère* mdp 
+    * users --> utilisé comme clé étrangère
+    * mdp 
     * statut
   * Parent 
-    * Users --> utilisé comme clé étrangère
+    * users --> utilisé comme clé étrangère
     * mdp
     
 ## Sitemap
@@ -118,7 +118,7 @@ Recrutement des nounous :
     * connection + php pour la vérifier la connexion --> recherche
       * recherche
       * profil + php pour remplir tout le profil et enregistrer les nouvelles infos modifié et nounou prisent
-      * validation-horaire + caroussel au clique de validation : laisser un avis/commentaire(horaire effcetive permet incrémentation salaire)
+      * validation-horaire + modal au clique de validation : laisser un avis/commentaire(horaire effcetive permet incrémentation salaire)
 * a-propos
 * contact
   
