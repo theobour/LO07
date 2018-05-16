@@ -28,12 +28,49 @@ Recrutement des nounous :
 ## Fonctionnalité : nounou
 
 ....
+
 * Fonctionnalité de création de compte pour une nounou, d'abord création de compte puis elle renseigne s'est informations pour envoyer sa candidature
 * Calendrier de nounou : définir une dispo simple ou  récurrente entre deux dates. Nouvelle bdd avec les différentes reservation par nounou ?
   * Permettre aux nounous de savoir quand elle taff et quand elle ne taff pas (rouge/vert)
   * Ce planning doit comprendre la modalité( langue, nb de gosse, où etc). (les parents doivent donc définir ça en reservant ? Possiblité de transmettre ces informations direct en les enregistrant côté parents ?)
 
 ## Fonctionnalité : parent
+
+## Base de donnée :
+
+* Parent :
+  * Nom de famille
+  * Ville
+  * Email
+  * Liste des enfants avec leur prénom, date de naissance, restrictions alimentaires
+  * Information générale (les parents peuvent déclarer des éléments importants pour l’organisation)
+* Nounou :
+  * langue
+    * ID clé étrangère
+    * Langue
+  * planning
+    * ID clé étrangère
+    * créneau de reservation (heure début, heure fin, date ?) 
+    * Ponctuel régulière étrangère
+    * Information enfant
+  * Info nounou
+    * Nom
+    * Prénom
+    * Ville
+    * Email
+    * Portable
+    * Liste des langues parlées
+    * Une photo
+    * Age
+    * Expérience
+    * Une phrase de présentation
+    * Liste des évaluations effectuées par les parents
+  * Candidate / bloquée
+* bdd pour compte : 
+  * Nounou avec ID clé primaire
+  * Parent avec ID clé primaire 
+  
+  
 
 
 
