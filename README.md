@@ -26,6 +26,6 @@ services proposés, les visiteurs doivent disposer d’un compte (login + mot de
 
 
 
-[ici](#LO07)
+[ici](#installation)
 
 
