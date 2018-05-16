@@ -115,6 +115,8 @@ Recrutement des nounous :
     * profil + php pour remplir tout le profil et enregistrer les nouvelles infos modifié et nounou prisent
     * recherche
     * nounou + php pour mettre en forme dynamiquement le profil de la nounou
+* a-propos
+* contact
   
   
 
