@@ -44,21 +44,31 @@ Recrutement des nounous :
 ## Base de donnée :
 
 * Parent :
+  * ID
   * Nom de famille
   * Ville
   * Email
-  * Liste des enfants avec leur prénom, date de naissance, restrictions alimentaires
-  * Information générale (les parents peuvent déclarer des éléments importants pour l’organisation)
+* Enfant :
+  * ID
+  * Prénom
+  * date de naissance
+  * Restriction alimentaire
+  * Information général
 * Nounou :
   * langue
     * ID clé étrangère
     * Langue
-  * planning
+  * planning créneau réservé
     * ID clé étrangère
-    * créneau de reservation (heure début, heure fin, date ?) 
+    * heure/date début
+    * heure/date fin
     * Ponctuel régulière étrangère
     * Information enfant
+  * Planning dispo
+    * ID
+    
   * Info nounou
+    * ID
     * Nom
     * Prénom
     * Ville
@@ -70,10 +80,17 @@ Recrutement des nounous :
     * Expérience
     * Une phrase de présentation
     * Liste des évaluations effectuées par les parents
-  * Candidate / bloquée
+  * Evalution :
+    * ID
+    * Note 
+    * Avis
 * bdd pour compte : 
-  * Nounou avec ID clé primaire
-  * Parent avec ID clé primaire 
+  * Nounou
+    * Users --> utilisé comme clé étrangère* mdp 
+    * statut
+  * Parent 
+    * Users --> utilisé comme clé étrangère
+    * mdp
   
   
 
