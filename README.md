@@ -103,18 +103,22 @@ Recrutement des nounous :
 
 * index
   * nounou
-    * connection + php pour la vérifier la connexion
     * creation + php pour vérifier la création
-    * planning + php dans la page pour créer le calendrier avec les dates + AJAX pour les événements
-    * creationplanning + formulaire --> ajouter des heures / retirer des heures ?
-    * profil + php pour remplir tout le profil et enregistrer les nouvelles infos modifié
+       * enregistrement-profil : formulaire --> redirection merci.php
+       * merci.php
+    * connection + php pour la vérifier la connexion --> planning (err si personne se connexte en étant candidate)
+      * planning + requete AJAX vers planning.php pour récupérer calendrier + horaires
+      * planning.php
+      * profil + php pour remplir tout le profil et enregistrer les nouvelles infos modifié
+      * creation-planning + formulaire --> ajouter des heures (bonus : retirer des heures)
+      * implementation-planning.php
   * parent
-    * connection + php pour la vérifier la connexion / si la connexion passe redirigé vers le calendrier
-    * creation + php pour vérifier la création  / si création OK redirigé vers enregistrementprofil
-    * enregistrementprofil : formulaire
-    * profil + php pour remplir tout le profil et enregistrer les nouvelles infos modifié et nounou prisent
-    * recherche
-    * nounou + php pour mettre en forme dynamiquement le profil de la nounou
+    * creation + php pour vérifier la création  / si création OK redirigé vers enregistrement-profil
+      * enregistrement-profil : formulaire --> redirection connexion
+    * connection + php pour la vérifier la connexion --> recherche
+      * recherche
+      * profil + php pour remplir tout le profil et enregistrer les nouvelles infos modifié et nounou prisent
+      * validation-horaire + caroussel au clique de validation : laisser un avis/commentaire(horaire effcetive permet incrémentation salaire)
 * a-propos
 * contact
   
