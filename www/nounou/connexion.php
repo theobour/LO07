@@ -25,7 +25,7 @@ try {
         if ($resultat !== false) {
             if (password_verify($mdp, $resultat['mdp'])) {
                 $_SESSION['cle'] = $resultat['ID'];
-                echo 'redirect';
+                header('Location: planning.html');
             } else {
                 array_push($erreur, 'Identifiant ou mot de passe incorrect');
             }
@@ -56,8 +56,7 @@ try {
             <form method="post" action="">
                 <div class="col-8 text-center">
                     <label for="pseudo">Votre pseudo :</label>
-                    <input type="text" placeholder="Votre pseudo" name="pseudo" id="pseudo" class="form-control" value="<?php echo $_SESSION['pseudo']; ?>">
-                </div>
+                    <input type="text" placeholder="Votre pseudo" name="pseudo" id="pseudo" class="form-control">
                 <div class="col-8 text-center">
                     <label for="mdp">Votre mot de passe :</label>
                     <input type="password" name="mdp" id="mdp" class="form-control">

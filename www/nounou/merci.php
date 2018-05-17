@@ -1,5 +1,5 @@
 <?php
-    header("refresh:15;url=planning.php");
+    header("refresh:5;url=../index.html");
 ?>
 
 <html>

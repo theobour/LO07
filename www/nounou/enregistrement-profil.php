@@ -15,27 +15,27 @@ try {
     }
     $erreur = [];
     $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
-    if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '') {
-        if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '' && isset($_POST['nom']) && $_POST['nom'] !== '' && isset($_POST['prenom']) && $_POST['prenom'] !== '' && isset($_POST['nom']) && $_POST['nom'] !== '' && isset($_POST['sexe']) && $_POST['sexe'] !== '' && isset($_POST['age']) && $_POST['age'] !== '' && isset($_POST['nblangue']) && $_POST['nblangue'] !== '' && isset($_POST['ville']) && $_POST['ville'] !== '' && isset($_POST['portable']) && $_POST['portable'] !== '' && isset($_POST['presentation']) && $_POST['presentation'] !== '' && isset($_POST['experience']) && $_POST['experience'] !== '' ) {
-            $nom = secure_data($_POST['nom']);
-            $prenom = secure_data($_POST['prenom']);
-            $sexe = secure_data($_POST['sexe']);
-            $age = secure_data($_POST['age']);
-            $nblangue = secure_data($_POST['nblangue']);
-            $ville = secure_data($_POST['ville']);
-            $portable = secure_data($_POST['portable']);
-            $presentation = secure_data($_POST['presentation']);
-            $experience = secure_data($_POST['experience']);
-            $update = "UPDATE info SET nom = '" . $nom . "', prenom = '" . $prenom . "', sexe = '" . $sexe . "', age = '" . $age . "', nblangue = '" . $nblangue . "', ville = '" . $ville . "', portable = '" . $portable . "', presentation = '" . $presentation . "', experience = '" . $experience . "' WHERE ID='" . $_SESSION['cle'] . "'";
-            $stmt = $bdd->prepare($update);
-            $stmt->execute();
-            //echo $stmt->rowCount() . " records UPDATED successfully";
+        if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '') {
+            if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '' && isset($_POST['nom']) && $_POST['nom'] !== '' && isset($_POST['prenom']) && $_POST['prenom'] !== '' && isset($_POST['nom']) && $_POST['nom'] !== '' && isset($_POST['sexe']) && $_POST['sexe'] !== '' && isset($_POST['age']) && $_POST['age'] !== '' && isset($_POST['nblangue']) && $_POST['nblangue'] !== '' && isset($_POST['ville']) && $_POST['ville'] !== '' && isset($_POST['portable']) && $_POST['portable'] !== '' && isset($_POST['presentation']) && $_POST['presentation'] !== '' && isset($_POST['experience']) && $_POST['experience'] !== '') {
+                $nom = secure_data($_POST['nom']);
+                $prenom = secure_data($_POST['prenom']);
+                $sexe = secure_data($_POST['sexe']);
+                $age = secure_data($_POST['age']);
+                $nblangue = secure_data($_POST['nblangue']);
+                $ville = secure_data($_POST['ville']);
+                $portable = secure_data($_POST['portable']);
+                $presentation = secure_data($_POST['presentation']);
+                $experience = secure_data($_POST['experience']);
+                $update = "UPDATE info SET nom = '" . $nom . "', prenom = '" . $prenom . "', sexe = '" . $sexe . "', age = '" . $age . "', nblangue = '" . $nblangue . "', ville = '" . $ville . "', portable = '" . $portable . "', presentation = '" . $presentation . "', experience = '" . $experience . "' WHERE ID='" . $_SESSION['cle'] . "'";
+                $stmt = $bdd->prepare($update);
+                $stmt->execute();
+                header('Location: merci.php');
+            } else {
+                array_push($erreur, 'Tout les champs doivent être rempli');
+            }
         } else {
-            array_push($erreur, 'Tout les champs doivent être rempli');
+            array_push($erreur, 'Vous n\êtes pas connecté');
         }
-    } else {
-        array_push($erreur, 'Vous n\êtes pas connecté');
-    }
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
