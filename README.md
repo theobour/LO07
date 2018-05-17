@@ -121,6 +121,27 @@ Recrutement des nounous :
       * validation-horaire + modal au clique de validation : laisser un avis/commentaire(horaire effcetive permet incrémentation salaire)
 * a-propos
 * contact
+
+## Base de donnée réelle :
+
+* Nounou ; table :
+  * connexion
+    * ID : int : clé primaire
+    * nomdecompte : varchar(50)
+    * mdp : text
+    * statut : varchar(50) -> Candidate / Bloquée / Nounou
+  * info 
+    * ID : varchar(255) --> correspondt nomdecompte de la table connexion
+    * nom : varchar(255)
+    * prenom : varchar(255)
+    * email : varchar(255)
+    * sexe : varchar(15)
+    * age : int
+    * nblangue : int
+    * ville : varchar(255)
+    * portable : int
+    * presentation : text
+    * experience : text
   
   
 
