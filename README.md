@@ -142,8 +142,18 @@ Recrutement des nounous :
     * portable : int
     * presentation : text
     * experience : text
-  
-  
+    
+    
+## TODO : (X = effectué)
+ * CSS 
+ * Mise en place du planning nounou
+ * Mise en place de la recherche pour les parents 
+ * Si une nounou n'est pas en statut "Nounou" elle ne peut pas accéder à ses pages
+ * Mise en place côté administrateur
+ * Profil parent : l'ensemble des enfants ne sont pas mis sur le profil
+ * Compléter la page profil pour permettre la modification des informations
+ * Js pour l'inscription pour permettre à la nounou de rentrer plusieurs langue
+ * 
 
 
 
