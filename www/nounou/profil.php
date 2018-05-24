@@ -4,7 +4,7 @@ try {
     $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
 
     if($_SESSION['cle'] !== 0 && isset($_SESSION['cle'])) {
-        $recuperation = "SELECT * FROM info";
+        $recuperation = "SELECT * FROM info WHERE ID='" . $_SESSION['cle'] . "'";
         $resultat = $bdd->query($recuperation);
         $resultat = $resultat->fetch(PDO::FETCH_ASSOC);
     }
@@ -45,6 +45,6 @@ try {
                 ?>
             <input type="submit" name="modif" value="modifier">
         </form>
-    <script src="script.js" type="text/javascript"></script>
+    <script src="../js/script.js" type="text/javascript"></script>
     </body>
 </html>

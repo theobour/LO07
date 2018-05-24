@@ -14,23 +14,18 @@ try {
         return $data;
     }
 
-    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
+    $bdd = new PDO('mysql:host=localhost;dbname=parent;charset=utf8', 'root', 'root');
     if (isset($_POST['submit']) && $_POST['submit'] !== '' && isset($_POST['pseudo']) && $_POST['pseudo'] !== '' && isset($_POST['mdp']) && $_POST['mdp'] !== '') {
         $erreur = [];
         $pseudo = secure_data($_POST['pseudo']);
         $mdp = secure_data($_POST['mdp']);
-        $recuperation = "SELECT ID, mdp, nomdecompte, statut FROM connexion WHERE nomdecompte='" . $pseudo . "'";
+        $recuperation = "SELECT ID, mdp, nomdecompte FROM connexion WHERE nomdecompte='" . $pseudo . "'";
         $resultat = $bdd->query($recuperation);
         $resultat = $resultat->fetch(PDO::FETCH_ASSOC);
         if ($resultat !== false) {
             if (password_verify($mdp, $resultat['mdp'])) {
-                if ($resultat['statut'] === 'nounou') {
-                    $_SESSION['cle'] = $resultat['nomdecompte'];
-                    header('Location: planning.html');
-                } else {
-                    $_SESSION['statut'] = $resultat['statut'];
-                    header('Location: redirection-erreur.php');
-                }
+                $_SESSION['cle'] = $resultat['nomdecompte'];
+                header('Location: profil.php');
             } else {
                 array_push($erreur, 'Identifiant ou mot de passe incorrect');
             }
@@ -62,18 +57,18 @@ try {
                 <div class="col-8 text-center">
                     <label for="pseudo">Votre pseudo :</label>
                     <input type="text" placeholder="Votre pseudo" name="pseudo" id="pseudo" class="form-control">
-                <div class="col-8 text-center">
-                    <label for="mdp">Votre mot de passe :</label>
-                    <input type="password" name="mdp" id="mdp" class="form-control">
-                </div>
-                <div class="col-12 text-center">
-                    <input type="submit" name="submit" value="Je m'inscris" class="btn btn-primary">
-                </div>
+                    <div class="col-8 text-center">
+                        <label for="mdp">Votre mot de passe :</label>
+                        <input type="password" name="mdp" id="mdp" class="form-control">
+                    </div>
+                    <div class="col-12 text-center">
+                        <input type="submit" name="submit" value="Je m'inscris" class="btn btn-primary">
+                    </div>
             </form>
             <?php
-                foreach ($erreur as $elt) {
-                    echo $elt;
-                }
+            foreach ($erreur as $elt) {
+                echo $elt;
+            }
             ?>
         </div>
     </div>
