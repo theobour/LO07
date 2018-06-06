@@ -29,18 +29,6 @@ try {
                 $update = "UPDATE info SET nom = '" . $nom . "', prenom = '" . $prenom . "', sexe = '" . $sexe . "', age = '" . $age . "', nblangue = '" . $nblangue . "', ville = '" . $ville . "', portable = '" . $portable . "', presentation = '" . $presentation . "', experience = '" . $experience . "' WHERE ID='" . $_SESSION['cle'] . "'";
                 $stmt = $bdd->prepare($update);
                 $stmt->execute();
-                /*
-                for ( $i = 0; $i < count($_POST['langue']); $i++) {
-                    $langue = $_POST['informationenfant'][$i];
-                    $sql = "INSERT INTO langue (ID, langue) VALUES ('" . $_SESSION['cle'] . "', '" . $langue . "')";
-                    $bdd->exec($sql);
-                }
-                */
-                foreach ($_POST['langue'] as $elt) {
-                    $elt = secure_data($elt);
-                    $sql = "INSERT INTO langue (ID, langue) VALUES ('" . $_SESSION['cle'] . "', '" . $elt . "')";
-                    $bdd->exec($sql);
-                }
                 header('Location: merci.php');
             } else {
                 array_push($erreur, 'Tout les champs doivent être rempli');
@@ -87,11 +75,10 @@ try {
                     <input type="number" name="age" id="mdp2" class="form-control">
                 </div>
                 <div class="col-8 text-center">
-                    <label for="mdp">Nb langue :</label>
-                    <input type="text" name="nblangue" id="nblangue" class="form-control">
-                    <button type="button" id="btnajoutlangue" class="btn">Go</button>
-                    <span id="ajoutlangue"></span>
+                    <label for="mdp2">Nb langue :</label>
+                    <input type="number" name="nblangue" id="mdp2" class="form-control">
                 </div>
+                <p>Mettre du js pour afficher les langues</p>
                 <div class="col-8 text-center">
                     <label for="mdp">Votre ville :</label>
                     <input type="text" name="ville" id="mdp" class="form-control">
@@ -119,7 +106,6 @@ try {
         </div>
     </div>
 </div>
-<script src="../js/script.js"></script>
 </body>
 
 </html>

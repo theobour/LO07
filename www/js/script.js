@@ -1,15 +1,18 @@
-var getLocation = function(href) {
-    var l = document.createElement("a");
-    l.href = href;
-    return l;
-};
-let url = getLocation(window.location.href);
-url = url.pathname; // A changer sur le serveur enlever le www sur chaque séléction
-console.log(url);
+
 /*==============================
         Profil nounou
 ================================ */
 
+function test () {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("test").innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("GET", "creation-planning.php?year=2018&month=5", true);
+    xhttp.send();
+}
 
 function modification (id) {
     id = id.concat("1");
@@ -23,10 +26,9 @@ function modification (id) {
 /*==============================
         Ajout enfant
 ================================ */
-if (url === "/www/parent/enregistrement-profil.php") {
-    let btnAjoutEnfant = document.getElementById('btnajout');
+    let btnAjout = document.getElementById('btnajout');
 
-    btnAjoutEnfant.addEventListener('click', function () {
+    btnAjout.addEventListener('click', function () {
         let nb = document.getElementById('nbenfant').value;
         let message = "";
         message += '<label>Prénom de l\'enfant :</label>';
@@ -40,23 +42,7 @@ if (url === "/www/parent/enregistrement-profil.php") {
             var champAjout = document.getElementById("ajoutenfant");
             champAjout.innerHTML += message;
         }
+
+        console.log("a");
     });
-}
-/*==============================
-    Ajout langue
-================================ */
-if (url === "/www/nounou/enregistrement-profil.php") {
-    let btnAjoutLangue = document.getElementById('btnajoutlangue');
-    btnAjoutLangue.addEventListener('click', function () {
-        let nb = document.getElementById('nblangue').value;
-        let message = "";
-        message += '<label>Langue :</label>';
-        message += '<input name="langue[]" type="text" class="form-control">';
-        var i;
-        for (i = 0; i < nb; i++) {
-            var champAjout = document.getElementById("ajoutlangue");
-            champAjout.innerHTML += message;
-        }
-    });
-}
 
