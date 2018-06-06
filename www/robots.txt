@@ -1,3 +1,0 @@
-Sitemap: http://www.innovutt.fr/path/of the/sitemap/sitemap.xml
-User-agent: *
-Disallow: 
