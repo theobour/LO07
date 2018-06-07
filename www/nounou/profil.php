@@ -3,15 +3,10 @@ session_start();
 try {
     $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
 
-    if($_SESSION['cle'] !== 0 && isset($_SESSION['cle'])) {
+    if($_SESSION['cle'] !== 0 && isset($_SESSION['cle']) && $_SESSION['statut'] === 'nounou' && isset($_SESSION['statut'])) {
         $recuperation = "SELECT * FROM info WHERE ID='" . $_SESSION['cle'] . "'";
         $resultat = $bdd->query($recuperation);
         $resultat = $resultat->fetch(PDO::FETCH_ASSOC);
-    }
-    if ($_SESSION['cle'] !== 0 && isset($_SESSION['cle']) && $_POST['modif'] !== '' && isset($_POST['modif'])) {
-        echo 'a';
-        unset($_POST['modif']);
-        $_POST['modif'] = '';
     }
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());

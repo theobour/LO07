@@ -17,6 +17,7 @@ try {
     }
 
     $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
+    $bddGenerique = new PDO('mysql:host=localhost;dbname=generique;charset=utf8', 'root', 'root');
     // On vérifie l'envoie
     if (isset($_POST['submit'])) {
         //  On vérifie que les variables ont toutes été rentré
@@ -31,21 +32,21 @@ try {
             if ($mail === $mail2) {
                 // On vérifié l'égalité entre les mdp
                 if ($mdp === $mdp2) {
+                    // le Nom de compte éxiste dans la base générique ?
                     $recuperation = "SELECT nomdecompte FROM connexion WHERE nomdecompte='" . $pseudo . "'";
-                    $resultat = $bdd->query($recuperation);
+                    $resultat = $bddGenerique->query($recuperation);
                     $resultat = $resultat->fetch(PDO::FETCH_ASSOC);
-                    // On regarde si le pseudo n'est pas déjà existant
                     if ($resultat === false) {
-                        $recuperation = "SELECT email FROM info WHERE email='" . $mail . "'";
-                        $resultat = $bdd->query($recuperation);
+                        $recuperation = "SELECT email FROM connexion WHERE email='" . $mail . "'";
+                        $resultat = $bddGenerique->query($recuperation);
                         $resultat = $resultat->fetch(PDO::FETCH_ASSOC);
                         // On vérifie si l'email n'est pas déjà existant
                         if ($resultat === false) {
                             $mdp = password_hash($mdp, PASSWORD_DEFAULT);
-                            $statut = 'candidate';
-                            $sql = "INSERT INTO connexion (nomdecompte, mdp, statut) VALUES ('"  . $pseudo . "', '" . $mdp . "', '" . $statut . "')";
+                            $statut = "candidate";
+                            $sql = "INSERT INTO connexion (nomdecompte, mdp, email,statut) VALUES ('"  . $pseudo . "', '" . $mdp . "', '" . $mail . "', '" . $statut . "')";
                             $sqlMail = "INSERT INTO info (ID, email) VALUES ('" . $pseudo . "', '" . $mail . "')";
-                            if($bdd->exec($sql) && $bdd->exec($sqlMail)) {
+                            if($bddGenerique->exec($sql) && $bdd->exec($sqlMail)) {
                                 header('Location: enregistrement-profil.php');
                                 $_SESSION['cle'] = $pseudo;
                                 echo 'succes';
