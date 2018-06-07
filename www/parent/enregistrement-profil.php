@@ -27,7 +27,6 @@ try {
             $update = "UPDATE info SET nom='" . $nom . "', telephone='" . $telephone . "', ville='" . $ville . "', enfant='" . $nbenfant . "', information='" . $info . "' WHERE ID='" . $_SESSION['cle'] . "'";
             $stmt = $bdd->prepare($update);
             $stmt->execute();
-            // remplacer par foreach
             for ( $i = 0; $i < count($_POST['prenomenfant']); $i++) {
                 $prenom = $_POST['prenomenfant'][$i];
                 $age = $_POST['ageenfant'][$i];

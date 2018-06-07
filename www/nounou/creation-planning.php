@@ -5,7 +5,7 @@
  * Date: 16/05/2018
  * Time: 20:40
  */
-function calendar_month($year, $month, $events = null) {
+function build_html_calendar($year, $month, $events = null) {
 
     // CSS classes
     $css_cal = 'calendar';
@@ -116,25 +116,15 @@ $events = [
     ],
 ];
 echo "<h2>July 2015</h2>";
-$year = $_GET['year'];
-$month = $_GET['month'];
-if ($_GET['type'] === 'mois') {
-    echo calendar_month($year, $month, $events);
-}
-if ($_GET['type'] === 'week') {
-    echo calendar_week($year, $month, $events);
-}
+echo build_html_calendar($_GET['year'], $_GET['month'], $events);
 
-/*
-echo date('d/m/Y', strtotime("+1 day"));
-echo '<br>';
+
+$test = strtotime("Monday");
+echo date('m/d/Y', $test) . '<br>';
+echo strtotime("10 September 2000"), "<br>\n";
 echo strtotime("+1 day"), "<br>\n";
 echo strtotime("+1 week"), "<br>\n";
 echo strtotime("+1 week 2 days 4 hours 2 seconds"), "<br>\n";
 echo strtotime("next Thursday"), "<br>\n";
 echo strtotime("2018-05"), "<br>\n";
-
-echo $running_day = date('N', mktime(0, 0, 0, $month, 1, $year));
-echo $days_in_month = date('t', mktime(0, 0, 0, $month, 1, $year));
-*/
 ?>
