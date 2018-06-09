@@ -41,7 +41,7 @@ try {
                     $sql = "INSERT INTO langue (ID, langue) VALUES ('" . $_SESSION['cle'] . "', '" . $elt . "')";
                     $bdd->exec($sql);
                 }
-                header('Location: merci.php');
+                header('Location: ../generique-file/merci.php');
             } else {
                 array_push($erreur, 'Tout les champs doivent être rempli');
             }

@@ -2,10 +2,7 @@
 session_start();
 $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
 if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '' && isset($_SESSION['statut']) && $_SESSION['statut'] === 'nounou' && $_POST['envoi'] !== '') {
-    $insertion = "INSERT INTO planning(ID, date, heure, statut) VALUES ('" . $_SESSION['cle'] . "', '" .  $_POST['date'] . "', '" . $_POST['heure'] . "', 'libre')";
-    $bdd->exec($insertion);
-    $_POST['envoi'] = '';
-    unset($_POST['envoi']);
+    ///////
 }
 ?>
 <!DOCTYPE html>
@@ -24,23 +21,19 @@ if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '' && isset($_SESSION['statu
         div.day-number		{ background:#999; padding:5px; color:#fff; font-weight:bold; float:right; margin:-5px -5px 0 0; width:20px; text-align:center; }
         /* shared */
         td.calendar-day, td.calendar-day-np { width:120px; padding:5px; border-bottom:1px solid #999; border-right:1px solid #999; }
-
     </style>
+    <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 </head>
 <body>
+<a id="btn-logout" class="btn btn-danger" href="../generique-file/deconnexion.php">Déco</a>
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <span id="calendrier1"></span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <form method="post" action="">
+            <form method="post" action="../generique-file/ajout-horaire.php">
                 <div class="row">
                     <div class="col-8">
-                        <label>Date de départ : (ex : 23/6/2018)</label>
+                        <label>Date de départ : (ex : 8/6/2018)</label>
                         <input type="text" name="date" class="form-control">
                     </div>
                     <div class="col-8">
@@ -52,6 +45,11 @@ if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '' && isset($_SESSION['statu
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <span id="calendrier1"></span>
         </div>
     </div>
 </div>

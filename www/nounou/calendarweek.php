@@ -1,4 +1,5 @@
 <?php
+session_start();
 class EasyWeeklyCalClass {
 
     var $dia;
@@ -144,8 +145,7 @@ class EasyWeeklyCalClass {
         $WeeksInMonth = $this->WeeksInMonth ($mes, $WeekNumber["leapYear"], $WeekNumber["diaSemana"]); 
         $numberOfWeek = $this->numberOfWeek ($dia, $mes, $ano);
         
-        $Output .="<tr>
-        <td></td>";
+        $Output .="<tr><td></td>";
 
         $resta = $diaSemana - 1;
         $diaMes = $diaMes - $resta;
@@ -266,8 +266,11 @@ class EasyWeeklyCalClass {
         $Output .="</tr>";
 
         $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
-        $recuperation = "SELECT date, heure, statut FROM planning WHERE ID='test'";
-        $resultat = $bdd->query($recuperation)->fetchAll();
+        $recuperation = "SELECT date, heure, statut FROM planning WHERE ID='" . $_SESSION['cle'] . "'";
+        if ($resultat = $bdd->query($recuperation)) {
+            echo 'réussi';
+            $resultat = $resultat->fetchAll();
+        }
         echo '<pre>';
         print_r($resultat);
         echo '</pre>';
@@ -285,7 +288,11 @@ class EasyWeeklyCalClass {
                 // On récupère là où l'ID est concerné
                 foreach ($resultat as $eltArray) {
                     if ($eltArray['heure'] === $heure && $eltArray['date'] === $date && $eltArray['statut'] === 'libre') {
-                        $Output .= '<td style="background-color: green;"></td>';
+                        $Output .= '<td style="background-color: green;">X</td>';
+                        $k = 1;
+                        break;
+                    } else if ($eltArray['heure'] === $heure && $eltArray['date'] === $date && $eltArray['statut'] === 'reserve') {
+                        $Output .= '<td style="background-color: red;">X</td>';
                         $k = 1;
                         break;
                     }
