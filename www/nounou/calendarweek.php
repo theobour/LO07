@@ -268,12 +268,8 @@ class EasyWeeklyCalClass {
         $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
         $recuperation = "SELECT date, heure, statut FROM planning WHERE ID='" . $_SESSION['cle'] . "'";
         if ($resultat = $bdd->query($recuperation)) {
-            echo 'réussi';
             $resultat = $resultat->fetchAll();
         }
-        echo '<pre>';
-        print_r($resultat);
-        echo '</pre>';
         for ($i=0; $i < 24;$i++)
         {
             $Output .="<tr>";
@@ -298,7 +294,7 @@ class EasyWeeklyCalClass {
                     }
                 }
                 if ($k === 0) {
-                    $Output .= '<td>' . $heure . ' et ' . $date . '</td>';
+                    $Output .= '<td></td>';
                 }
             }
 
@@ -367,19 +363,17 @@ class EasyWeeklyCalClass {
             $anoPost = $ano;
         }
 
-
+/*
         $Output .= "<p style='font-weight:bold; font-size:0.8em;'>
 
 <a href='".$PHP_SELF."?dia=".$ant."&mes=".$mesAnt."&ano=".$anoAnt."'>&laquo; previous week</a> |
 
 <a href='".$PHP_SELF."?dia=".$post."&mes=".$mesPost."&ano=".$anoPost."'>next week &raquo;</a>
 </p>";
-
+*/
         return $Output;
 	
 	}
-
-
 
     function buttons ($dia, $mes, $ano, $numDiasMes){
         $previousMonth = $this->previousMonth ($dia, $mes, $ano);
@@ -433,13 +427,14 @@ class EasyWeeklyCalClass {
             $anoPost = $ano;
         }
 
-
+/*
         $Output .= "<p style='font-weight:bold; font-size:0.8em;'>
 
 <a href='".$PHP_SELF."?dia=".$ant."&mes=".$mesAnt."&ano=".$anoAnt."'>&laquo; previous</a> |
 
 <a href='".$PHP_SELF."?dia=".$post."&mes=".$mesPost."&ano=".$anoPost."'>next &raquo;</a>
 </p>";
+*/
 
         return $Output;
     }

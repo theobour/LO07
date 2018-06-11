@@ -21,8 +21,7 @@ try {
             $recuperation = "SELECT * FROM salaire WHERE ID='" . $_POST['nomnounou'][$k] . "'";
             $resultatSalaire = $bddNounou->query($recuperation)->fetch(PDO::FETCH_ASSOC);
             $salaire = $resultatSalaire['salaire'] + $_POST['prix'][$k];
-            $heure = $resultatSalaire['heure'] + 1;
-            echo 'go';
+            $heure = $resultatSalaire['nbheure'] + 1;
             $update = "UPDATE salaire SET salaire='" . $salaire ."', nbheure='" . $heure . "' WHERE ID='" . $_POST['nomnounou'][$k] . "'";
             $stmt = $bddNounou->prepare($update);
             $stmt->execute();

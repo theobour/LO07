@@ -9,10 +9,6 @@ try {
         $resultat = $resultat->fetch(PDO::FETCH_ASSOC);
         $recuperationEnfant = "SELECT * FROM enfant";
         $resultatEnfant = $bdd->query($recuperationEnfant)->fetchAll();
-    }
-} catch (Exception $e) {
-    die('Erreur : ' . $e->getMessage());
-}
 
 ?>
 <html>
@@ -40,7 +36,6 @@ try {
     }
     echo '</table>';
     echo '<p>Vos enfants</p>';
-    echo $_SESSION['cle'];
     echo '<table>';
     foreach ($resultatEnfant as $eltArray) {
         foreach ($eltArray as $key => $value) {
@@ -63,3 +58,10 @@ try {
 <script src="../js/script.js" type="text/javascript"></script>
 </body>
 </html>
+<?php
+    }
+} catch (Exception $e) {
+    die('Erreur : ' . $e->getMessage());
+}
+?>
+

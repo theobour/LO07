@@ -13,6 +13,9 @@ try {
 
         $recuperation = "SELECT enfant FROM info WHERE ID='" . $_SESSION['cle'] . "'";
         $nbEnfant = $bddParent->query($recuperation)->fetch(PDO::FETCH_ASSOC);
+
+        $recuperation = "SELECT * FROM avis WHERE ID ='" . $_GET['nounou'] ."'";
+        $resultatAvis = $bdd->query($recuperation)->fetchAll();
     }
 
 }  catch (Exception $e) {
@@ -51,12 +54,33 @@ try {
             </div>
             <div class="col-12">
                 <?php
+                $dia = date ("d");
+                $mes = date ("n");
+                $ano = date ("Y");
+                $date = $dia . '/' . $mes . '/' . $ano;
                 foreach ($resultatPlanning as $elt) {
-                    $output .= '////// <br>';
-                    $output .= $elt['heure'] . ' et ' . $elt['date'] . '<br>';
-                    $output .= '//////';
+                    if ($elt['heure'] < $date){
+                        $output .= '////// <br>';
+                        $output .= $elt['heure'] . ' et ' . $elt['date'] . '<br>';
+                        $output .= '//////';
+                    }
                 }
                 echo $output;
+                ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2>avis</h2>
+            </div>
+            <div class="col-12">
+                <?php
+                foreach ($resultatAvis as $elt) {
+                    echo 'Avis de : ' . $elt['parent'] . '<br>';
+                    echo 'Note : ' . $elt['note'] . '<br>';
+                    echo 'Avis : ' . $elt['avis'] . '<br>';
+                    echo '-----------<br>';
+                }
                 ?>
             </div>
         </div>

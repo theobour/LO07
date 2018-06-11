@@ -5,8 +5,10 @@ try {
 
     if($_SESSION['cle'] !== 0 && isset($_SESSION['cle']) && $_SESSION['statut'] === 'nounou' && isset($_SESSION['statut'])) {
         $recuperation = "SELECT * FROM info WHERE ID='" . $_SESSION['cle'] . "'";
-        $resultat = $bdd->query($recuperation);
-        $resultat = $resultat->fetch(PDO::FETCH_ASSOC);
+        $resultat = $bdd->query($recuperation)->fetch(PDO::FETCH_ASSOC);
+
+        $recuperation = "SELECT * FROM salaire WHERE ID='" . $_SESSION['cle'] . "'";
+        $resultatSalaire = $bdd->query($recuperation)->fetch(PDO::FETCH_ASSOC);
     }
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
@@ -37,6 +39,10 @@ try {
                     echo '</td></tr>';
                 }
                 echo '</table>';
+
+                echo '--------------';
+                echo 'salaire';
+                echo 'Vous avez travaillé ' . $resultatSalaire['nbheure'] . 'h et vous avez gagné ' . $resultatSalaire['salaire'] . 'euros';
                 ?>
             <input type="submit" name="modif" value="modifier">
         </form>

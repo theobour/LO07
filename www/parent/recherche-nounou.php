@@ -12,16 +12,32 @@
             }
         }
         $date = $_GET['date'];
-        $heure = $_GET['heure'];
+        //$heure = $_GET['heure'];
         $langue = $_GET['langue'];
-        if (isset($date) && $date !== '' && isset($heure) && $heure !== '' && isset($langue) && $langue !== '') {
+        if (isset($date) && $date !== '' && isset($langue) && $langue !== '') {
             // Si français
             if ($langue === 'français') {
-                $recuperation = "SELECT * FROM planning WHERE date='" . $date . "' AND heure='" . $heure ."' AND statut='libre'";
+                $recuperation = "SELECT * FROM planning WHERE date='" . $date . "' AND statut='libre'";
                 $resultat = $bdd->query($recuperation)->fetchAll();
                 $listeNounouFrancais = $resultat;
             } else {
-                echo 'non français';
+                // On récupère les gens qui sont dispo
+                // On récupère les ID des mecs qui parlent la langue qu'on stock dans un tableau
+                // Dans foreach on requête pour chaque élément
+                // on imbrique un foreach qui va prendre l'élément et traiter son nombre d'occurence
+                echo 'cas2';
+                $recuperation = "SELECT * FROM planning WHERE date='" . $date . "' AND statut='libre'";
+                $resultatNounou = $bdd->query($recuperation)->fetchAll();
+
+                $ensembleNounou = array('ID' => array(), 'heure' => array());
+                foreach ($resultatNounou as $elt) {
+                    $recuperation = "SELECT * FROM langue WHERE langue='" . $_GET['langue'] . "' AND ID='" .  $elt['ID'] ."'";
+                    $resultat = $bdd->query($recuperation)->fetch(PDO::FETCH_ASSOC);
+                    if (!empty($resultat)) {
+                        array_push($ensembleNounou['ID'], $elt['ID']);
+                        array_push($ensembleNounou['heure'], $elt['heure']);
+                    }
+                }
             }
         }
 
@@ -55,7 +71,7 @@
                             <option value="français">Français</option>
                             <?php
                             foreach ($langueArray as $elt) {
-                                echo '<option value="$elt">';
+                                echo '<option value="' . $elt . '">';
                                 echo $elt;
                                 echo '</option>';
                             }
@@ -82,13 +98,28 @@
                    $output .= '<div class="row element-nounou">';
                    $output .= '<div class="col-8">';
                    $output .= $resultat['nom'] . ' ' . $resultat['prenom'];
-                   $output .= '<br>' . $resultat['sexe'];
+                   $output .= '<br>' . $resultat['sexe'] . '<br>' . $elt['heure'];
                    $output .= '</div><div class="col-2 offset-2">';
                    $output .= $resultat['age'] . ' ans';
                    $output .= '</div>';
                    $output .= '</div>';
                    $output .= '</a>';
                }
+            foreach ($ensembleNounou['ID'] as $key => $elt) {
+                $recuperation = "SELECT nom,prenom,sexe,age FROM info WHERE ID='" . $elt . "'";
+                $resultat = $bdd->query($recuperation)->fetch(PDO::FETCH_ASSOC);
+                print_r($resultat);
+                $output .= '<a href="profil-nounou.php?nounou=' . $elt . '&date=' . $date . '&heure=' . $elt['heure'][$key] . '">';
+                $output .= '<div class="row element-nounou">';
+                $output .= '<div class="col-8">';
+                $output .= $resultat['nom'] . ' ' . $resultat['prenom'];
+                $output .= '<br>' . $resultat['sexe'] . '<br>' . $ensembleNounou['heure'][$key];
+                $output .= '</div><div class="col-2 offset-2">';
+                $output .= $resultat['age'] . ' ans';
+                $output .= '</div>';
+                $output .= '</div>';
+                $output .= '</a>';
+            }
                echo $output;
             ?>
 </div>
