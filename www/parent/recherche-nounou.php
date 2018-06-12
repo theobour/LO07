@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
+    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', '');
     if (isset($_SESSION['cle'])) {
         // Récupération des langues et implémentation dynamique
         $langueArray = array();
@@ -43,31 +43,32 @@
 
     }
 ?>
-<!doctype html>
-<html>
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="../style/style.css">
-</head>
-<body>
-<a id="btn-logout" class="btn btn-danger" href="../generique-file/deconnexion.php">Déco</a>
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <form method="get" action="">
-                <div class="row">
-                    <div class="col-3">
-                        <label>La date : (ex 23/6/2018)</label>
-                        <input type="text" name="date">
-                    </div>
-                    <div class="col-3">
-                        <label>A partir de : (ex 11:00)</label><br>
-                        <input type="text" name="heure">
-                    </div>
-                    <div class="col-3">
-                        <label>La langue parlé</label><br>
-                        <select name="langue">
+    <!doctype html>
+    <html>
+
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="../style/style.css">
+    </head>
+
+    <body>
+        <a id="btn-logout" class="btn btn-danger" href="../generique-file/deconnexion.php">Déco</a>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <form method="get" action="">
+                        <div class="row">
+                            <div class="col-3">
+                                <label>La date : (ex 23/6/2018)</label>
+                                <input type="text" name="date">
+                            </div>
+                            <div class="col-3">
+                                <label>A partir de : (ex 11:00)</label><br>
+                                <input type="text" name="heure">
+                            </div>
+                            <div class="col-3">
+                                <label>La langue parlé</label><br>
+                                <select name="langue">
                             <option value="français">Français</option>
                             <?php
                             foreach ($langueArray as $elt) {
@@ -77,19 +78,19 @@
                             }
                             ?>
                         </select>
-                    </div>
-                    <div class="col-3">
-                        <input type="submit" value="Envoyer" class="btn btn-primary">
-                    </div>
+                            </div>
+                            <div class="col-3">
+                                <input type="submit" value="Envoyer" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <h1>La liste des nounou correspondant à votre recherche</h1>
-        </div>
-    </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h1>La liste des nounou correspondant à votre recherche</h1>
+                </div>
+            </div>
             <?php
                foreach ($listeNounouFrancais as $elt) {
                    $recuperation = "SELECT nom,prenom,sexe,age FROM info WHERE ID='" . $elt['ID'] . "'";
@@ -122,7 +123,7 @@
             }
                echo $output;
             ?>
-</div>
-</body>
+        </div>
+    </body>
 
-</html>
+    </html>

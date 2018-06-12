@@ -1,7 +1,8 @@
 <?php
 session_start();
+ini_set("display_errors",0);error_reporting(0);
 try {
-    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
+    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', '');
 
     if($_SESSION['cle'] !== 0 && isset($_SESSION['cle']) && $_SESSION['statut'] === 'nounou' && isset($_SESSION['statut'])) {
         $recuperation = "SELECT * FROM info WHERE ID='" . $_SESSION['cle'] . "'";
@@ -15,16 +16,21 @@ try {
 }
 
 ?>
-<html>
+    <html>
+
     <head>
         <title>Profil</title>
         <style>
-            table, th, td {
+            table,
+            th,
+            td {
                 border: 1px solid black;
                 border-collapse: collapse;
             }
+
         </style>
     </head>
+
     <body>
         <form>
             <?php
@@ -44,8 +50,9 @@ try {
                 echo 'salaire';
                 echo 'Vous avez travaillé ' . $resultatSalaire['nbheure'] . 'h et vous avez gagné ' . $resultatSalaire['salaire'] . 'euros';
                 ?>
-            <input type="submit" name="modif" value="modifier">
+                <input type="submit" name="modif" value="modifier">
         </form>
-    <script src="../js/script.js" type="text/javascript"></script>
+        <script src="../js/script.js" type="text/javascript"></script>
     </body>
-</html>
+
+    </html>
