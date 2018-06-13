@@ -1,4 +1,7 @@
 <?php
+//Erreurs masquées
+ini_set("display_errors",0);error_reporting(0);
+
 session_start();
 //Le pseudo vérifier qu'il n'a pas été utilisé
 //Le mail vérifier qu'il est correct

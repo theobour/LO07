@@ -2,7 +2,7 @@
 
 try {
     session_start();
-    $bddNounou = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
+    $bddNounou = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', '');
 
     if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '' && isset($_SESSION['statut']) && $_SESSION['statut'] === 'nounou' && $_POST['envoi'] !== '') {
         $insertion = "INSERT INTO planning(ID, date, heure, statut) VALUES ('" . $_SESSION['cle'] . "', '" .  $_POST['date'] . "', '" . $_POST['heure'] . "', 'libre')";

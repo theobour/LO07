@@ -1,7 +1,8 @@
 <html>
+
 <head>
-<title>Example of a weekly schedule</title>
-<?
+    <title>Example of a weekly schedule</title>
+    <?
 //I don't know the author of the Monthcalendar, but ...  Thanks for the Code !! you can find it in http://foros.cristalab.com/formato-de-fecha-en-calendario-t76780
 $anoInicial = '1900';
 $anoFinal = '2100';
@@ -11,31 +12,36 @@ $funcionTratarFecha = 'document.location = "?dia="+dia+"&mes="+mes+"&ano="+ano;'
 
 ?>
 
-    <script>
-function tratarFecha(dia,mes,ano){
-  <?=$funcionTratarFecha?>
-}
-</script>
+        <script>
+            function tratarFecha(dia, mes, ano) {
+                <?=$funcionTratarFecha?>
+            }
 
-<style>
-.m1 {
-   font-family:MS Sans Serif;
-   font-size:8pt
-}
-a {
-   text-decoration:none;
-   color:#000000;
-}
+        </script>
 
-td {
-font-size:0.6em;
-}
-</style>
+        <style>
+            .m1 {
+                font-family: MS Sans Serif;
+                font-size: 8pt
+            }
+
+            a {
+                text-decoration: none;
+                color: #000000;
+            }
+
+            td {
+                font-size: 0.6em;
+            }
+
+        </style>
 
 </head>
 
 <body>
-<?php
+    <?php
+//Erreurs masquées
+ini_set("display_errors",0);error_reporting(0);
 
 //include the WeeklyCalClass and create the object !!
 include ("calendarweek.php");
@@ -58,4 +64,5 @@ $ano = date ("Y");
 ?>
 
 </body>
+
 </html>

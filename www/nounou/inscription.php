@@ -146,7 +146,6 @@ try {
         </section>
 
 
-
         <!-- Contenu page -->
         <div style="padding-top: 100px" class="container">
             <div class="row">
