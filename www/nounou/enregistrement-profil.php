@@ -157,9 +157,17 @@ try {
                                 <input type="number" name="age" id="mdp2" class="form-control">
                             </div>
                             <label for="mdp">Nombre de langues parlées</label>
-                            <input type="text" name="nblangue" id="nblangue" class="form-control">
-                            <!-- <button type="button" id="btnajoutlangue" class="btn">Go</button> -->
-                            <span id="ajoutlangue"></span>
+                            <div class="row">
+                                <div style="padding-top: 5px" class="col-8">
+                                    <input type="number" name="nblangue" id="nblangue" class="form-control">
+                                </div>
+                                <div class="col-4">
+                                    <button style="padding-left: 20px; padding-right: 20px;" type="button" id="btnajoutlangue" class="btn btn-primary">Go</button>
+                                </div>
+                                <div class="row">
+                                    <span id="ajoutlangue"></span>
+                                </div>
+                            </div>
 
                             <label for="mdp">Votre ville</label>
                             <input type="text" name="ville" id="mdp" class="form-control">

@@ -1,17 +1,16 @@
-var getLocation = function(href) {
+var getLocation = function (href) {
     var l = document.createElement("a");
     l.href = href;
     return l;
 };
 let url = getLocation(window.location.href);
 url = url.pathname; // A changer sur le serveur enlever le www sur chaque séléction
-console.log(url);
 /*==============================
         Profil nounou
 ================================ */
 
 
-function modification (id) {
+function modification(id) {
     id = id.concat("1");
     console.log(id);
     let elt = document.getElementById(id);
@@ -23,7 +22,7 @@ function modification (id) {
 /*==============================
         Ajout enfant
 ================================ */
-if (url === "/www/parent/enregistrement-profil.php") {
+if (url === "/LO07/www/parent/enregistrement-profil.php") {
     let btnAjoutEnfant = document.getElementById('btnajout');
 
     btnAjoutEnfant.addEventListener('click', function () {
@@ -45,7 +44,9 @@ if (url === "/www/parent/enregistrement-profil.php") {
 /*==============================
     Ajout langue
 ================================ */
-if (url === "/www/nounou/enregistrement-profil.php") {
+console.log(url);
+if (url === "/LO07/www/nounou/enregistrement-profil.php") {
+    console.log("ok");
     let btnAjoutLangue = document.getElementById('btnajoutlangue');
     btnAjoutLangue.addEventListener('click', function () {
         let nb = document.getElementById('nblangue').value;
@@ -59,4 +60,3 @@ if (url === "/www/nounou/enregistrement-profil.php") {
         }
     });
 }
-

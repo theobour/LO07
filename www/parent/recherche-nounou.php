@@ -28,7 +28,6 @@ ini_set("display_errors",0);error_reporting(0);
                 // On récupère les ID des mecs qui parlent la langue qu'on stock dans un tableau
                 // Dans foreach on requête pour chaque élément
                 // on imbrique un foreach qui va prendre l'élément et traiter son nombre d'occurence
-                echo 'cas2';
                 $recuperation = "SELECT * FROM planning WHERE date='" . $date . "' AND statut='libre'";
                 $resultatNounou = $bdd->query($recuperation)->fetchAll();
 
@@ -184,7 +183,6 @@ ini_set("display_errors",0);error_reporting(0);
             foreach ($ensembleNounou['ID'] as $key => $elt) {
                 $recuperation = "SELECT nom,prenom,sexe,age FROM info WHERE ID='" . $elt . "'";
                 $resultat = $bdd->query($recuperation)->fetch(PDO::FETCH_ASSOC);
-                print_r($resultat);
                 $output .= '<a href="profil-nounou.php?nounou=' . $elt . '&date=' . $date . '&heure=' . $elt['heure'][$key] . '">';
                 $output .= '<div class="row element-nounou">';
                 $output .= '<div class="col-8">';

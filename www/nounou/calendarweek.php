@@ -268,7 +268,7 @@ class EasyWeeklyCalClass {
 
         $Output .="</tr>";
 
-        $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
+        $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', '');
         $recuperation = "SELECT date, heure, statut FROM planning WHERE ID='" . $_SESSION['cle'] . "'";
         if ($resultat = $bdd->query($recuperation)) {
             $resultat = $resultat->fetchAll();

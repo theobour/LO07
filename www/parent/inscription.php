@@ -1,4 +1,7 @@
 <?php
+//Erreurs masquées
+ini_set("display_errors",0);error_reporting(0);
+
 session_start();
 //Le pseudo vérifier qu'il n'a pas été utilisé
 //Le mail vérifier qu'il est correct
@@ -16,7 +19,7 @@ try {
         return $data;
     }
 
-    //$bdd = new PDO('mysql:host=localhost;dbname=parent;charset=utf8', 'root', 'root');
+    $bdd = new PDO('mysql:host=localhost;dbname=parent;charset=utf8', 'root', '');
     $bddGenerique = new PDO('mysql:host=localhost;dbname=generique;charset=utf8', 'root', '');
     // On vérifie l'envoie
     if (isset($_POST['submit'])) {

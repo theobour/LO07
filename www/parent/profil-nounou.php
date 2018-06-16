@@ -117,7 +117,9 @@ try {
 
         <!-- Contenu page -->
         <div style="padding-top: 100px; padding-bottom: 20px" class="col-12 text-center">
-            <h1>Nomdelanourrice</h1>
+            <h1>
+                <?php echo $resultat['nom'] . ' ' . $resultat['prenom'] ;  ?>
+            </h1>
         </div>
         <div class="container">
             <div class="col-sm-4 offset-sm-4">

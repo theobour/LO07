@@ -61,15 +61,15 @@ try {
 
         $recuperation = "SELECT nomdecompte FROM connexion WHERE statut='candidate'";
         $resultat = $bdd->query($recuperation);
-        $resultatCandidate = $resultat->fetch(PDO::FETCH_ASSOC);
+        $resultatCandidate = $resultat->fetchAll();
 
         $recuperation = "SELECT nomdecompte FROM connexion WHERE statut='bloque'";
         $resultat = $bdd->query($recuperation);
-        $resultatBloque = $resultat->fetch(PDO::FETCH_ASSOC);
+        $resultatBloque = $resultat->fetchAll();
 
         $recuperation = "SELECT nomdecompte FROM connexion WHERE statut='nounou'";
         $resultat = $bdd->query($recuperation);
-        $resultatNounou = $resultat->fetch(PDO::FETCH_ASSOC);
+        $resultatNounou = $resultat->fetchAll();
     }
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
@@ -162,7 +162,7 @@ try {
                             foreach ($resultatCandidate as $elt) {
                                 echo '<div class="row">';
                                 echo '<div class="col-12">';
-                                echo '<p>' . $elt . '</p>';
+                                echo '<p>' . $elt['nomdecompte'] . '</p>';
                                 echo '</div>';
                                 echo '<div class="col-6">';
                                 echo '<input type="submit" class="btn btn-primary" name="submitcandidat" value="OK">';
@@ -171,7 +171,7 @@ try {
                                 echo '<input type="submit" class="btn btn-secondary" name="submitcandidat" value="NO">';
                                 echo '</div>';
                                 echo '</div>';
-                                echo '<input type="hidden" name="nomdecompte" value="' . $elt . '">';
+                                echo '<input type="hidden" name="nomdecompte" value="' . $elt['nomdecompte'] . '">';
                             }
                             ?>
                         </form>
@@ -189,7 +189,7 @@ try {
                             foreach ($resultatBloque as $elt) {
                                 echo '<div class="row">';
                                 echo '<div class="col-12">';
-                                echo '<p>' . $elt . '</p>';
+                                echo '<p>' . $elt['nomdecompte'] . '</p>';
                                 echo '</div>';
                                 echo '<div class="col-6">';
                                 echo '<input style="padding-left:20px; padding-right: 20px" type="submit" class="btn btn-secondary" name="submitbloquer" value="supprimer">';
@@ -198,7 +198,7 @@ try {
                                 echo '<input style="padding-left:20px; padding-right: 20px" type="submit" class="btn btn-primary" name="submitbloquer" value="debloquer">';
                                 echo '</div>';
                                 echo '</div>';
-                                echo '<input type="hidden" name="nomdecompte" value="' . $elt . '">';
+                                echo '<input type="hidden" name="nomdecompte" value="' . $elt['nomdecompte'] . '">';
                             }
                             ?>
                         </form>
@@ -213,13 +213,13 @@ try {
                             foreach ($resultatNounou as $elt) {
                                 echo '<div class="row">';
                                 echo '<div class="col-12">';
-                                echo '<p>' . $elt . '</p>';
+                                echo '<p>' . $elt['nomdecompte'] . '</p>';
                                 echo '</div>';
                                 echo '<div class="col-12">';
                                 echo '<input type="submit" class="btn btn-secondary" name="submitnounou" value="bloquer">';
                                 echo '</div>';
                                 echo '</div>';
-                                echo '<input type="hidden" name="nomdecompte" value="' . $elt . '">';
+                                echo '<input type="hidden" name="nomdecompte" value="' . $elt['nomdecompte'] . '">';
                             }
                             ?>
                         </form>
