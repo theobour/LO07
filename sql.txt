@@ -1,0 +1,31 @@
+// table connexion dans BDD générique
+
+CREATE TABLE `generique`.`connexion` ( `ID` INT NOT NULL AUTO_INCREMENT ,  `nomdecompte` VARCHAR(255) NOT NULL ,  `mdp` TEXT NOT NULL ,  `email` VARCHAR(255) NOT NULL ,  `statut` VARCHAR(255) NOT NULL ,    PRIMARY KEY  (`ID`)) ENGINE = InnoDB;
+
+//table avis dans BDD nounou
+
+CREATE TABLE `nounou`.`avis` ( `ID` VARCHAR(255) NOT NULL ,  `note` INT NOT NULL ,  `avis` TEXT NOT NULL ,  `parent` VARCHAR(255) NOT NULL ) ENGINE = InnoDB;
+
+//table info dans BDD nounou
+
+CREATE TABLE `nounou`.`info` ( `ID` VARCHAR(255) NOT NULL ,  `nom` VARCHAR(255) NOT NULL ,  `prenom` VARCHAR(255) NOT NULL ,  `email` VARCHAR(255) NOT NULL ,  `sexe` VARCHAR(15) NOT NULL ,  `age` INT NOT NULL ,  `nblangue` INT NOT NULL ,  `ville` VARCHAR(255) NOT NULL ,  `portable` INT NOT NULL ,  `presentation` TEXT NOT NULL ,  `experience` TEXT NOT NULL ,  `photo` BLOB NOT NULL ) ENGINE = InnoDB;
+
+//table langue dans BDD nounou
+
+CREATE TABLE `nounou`.`langue` ( `ID` VARCHAR(255) NOT NULL , `langue` VARCHAR(255) NOT NULL ) ENGINE = InnoDB;
+
+//table planning dans BDD nounou
+
+CREATE TABLE `nounou`.`planning` ( `ID` VARCHAR(255) NOT NULL ,  `date` VARCHAR(255) NOT NULL ,  `heure` VARCHAR(255) NOT NULL ,  `statut` VARCHAR(255) NOT NULL ,  `prix` INT NOT NULL ,  `client` VARCHAR(255) NOT NULL ) ENGINE = InnoDB;
+
+//table salaire dans BDD nounou
+
+CREATE TABLE `nounou`.`salaire` ( `ID` VARCHAR(255) NOT NULL ,  `salaire` INT NOT NULL ,  `nbheure` INT NOT NULL ) ENGINE = InnoDB;
+
+//table info dans BDD parent
+
+CREATE TABLE `parent`.`info` ( `ID` VARCHAR(255) NOT NULL ,  `nom` VARCHAR(255) NOT NULL ,  `email` VARCHAR(255) NOT NULL ,  `telephone` INT NOT NULL ,  `ville` VARCHAR(255) NOT NULL ,  `enfant` INT NOT NULL ,  `information` TEXT NOT NULL ) ENGINE = InnoDB;
+
+//table enfant dans BDD parent
+
+CREATE TABLE `parent`.`enfant` ( `ID` VARCHAR(255) NOT NULL ,  `prenom` VARCHAR(255) NOT NULL ,  `age` INT NOT NULL ,  `information` TEXT NOT NULL ) ENGINE = InnoDB;
