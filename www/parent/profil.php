@@ -4,7 +4,7 @@ ini_set("display_errors",0);error_reporting(0);
 
 session_start();
 try {
-    $bdd = new PDO('mysql:host=localhost;dbname=parent;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=parent;charset=utf8', 'root', 'root');
 
     if($_SESSION['cle'] !== 0 && isset($_SESSION['cle']) && $_SESSION['statut'] === 'parent' && isset($_SESSION['statut'])) {
         $recuperation = "SELECT * FROM info WHERE ID='" . $_SESSION['cle'] . "'";
@@ -24,6 +24,7 @@ try {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
         <link rel="stylesheet" href="../assets/tether/tether.min.css">
+        <link rel="icon" href="../images/enfant-excite.jpg" />
         <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-grid.min.css">
         <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-reboot.min.css">
@@ -104,39 +105,26 @@ try {
 
         <!-- Contenu page -->
         <div style="padding-top:100px; min-height:465px" class="container">
-            <form>
                 <?php
-                    echo '<table>';
                     foreach ($resultat as $key => $value) {
-                        echo '<tr><td>';
-                        echo $key;
-                        echo '</td><td>';
-                        echo $value;
-                        echo '<button type="button" id="' . $key . '" onclick="modification(this.id)">Modifier</button>';
-                        echo '<span id="' . $key . '1"></span>';
-                        echo '</td></tr>';
+                        if($key !== "ID") {
+                            echo '<strong>' . $key . ' :</strong> ';
+                            echo $value . '<br>';
+                        }
                     }
-                    echo '</table>';
-                    echo '<h5>Vos enfants</h5>';
-                    echo '<table>';
+                    echo '<h5 style="margin-top: 20px;">Vos enfants</h5>';
                     foreach ($resultatEnfant as $eltArray) {
                         foreach ($eltArray as $key => $value) {
                             if (!is_numeric($key)) {
-                                echo '<tr><td>';
-                                echo $key;
-                                echo '</td><td>';
-                                echo $value;
-                                echo '<button type="button" id="' . $key . '" onclick="modification(this.id)">Modifier</button>';
-                                echo '<span id="' . $key . '1"></span>';
-                                echo '</td></tr>';
+                                if($key !== "ID") {
+                                    echo '<strong>' . $key . ' :</strong> ';
+                                    echo $value . '<br>';
+                                }
                             }
                         }
                     }
-                    echo '</table>';
 
                 ?>
-                    <input type="submit" name="modif" value="modifier">
-            </form>
         </div>
 
         <!-- Footer -->

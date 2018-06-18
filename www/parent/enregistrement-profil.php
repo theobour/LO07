@@ -15,7 +15,7 @@ try {
     }
     $erreur = [];
     echo $_SESSION['cle'];
-    $bdd = new PDO('mysql:host=localhost;dbname=parent;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=parent;charset=utf8', 'root', 'root');
     if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '') {
         if (isset($_POST['nom']) && $_POST['nom'] !== '') {
             $nom = secure_data($_POST['nom']);
@@ -62,6 +62,7 @@ try {
         <link rel="stylesheet" href="../assets/dropdown/css/style.css">
         <link rel="stylesheet" href="../assets/socicon/css/styles.css">
         <link rel="stylesheet" href="../assets/theme/css/style.css">
+        <link rel="icon" href="../images/enfant-excite.jpg" />
         <link rel="stylesheet" href="../assets/mobirise/css/mbr-additional.css" type="text/css">
     </head>
 
@@ -145,8 +146,9 @@ try {
                                 <div class="col-4">
                                     <button type="button" id="btnajout" class="btn btn-primary">Go</button>
                                 </div>
-                                <span id="ajoutenfant"></span>
                             </div>
+
+                            <span id="ajoutenfant"></span>
 
                         </div>
                         <div class="col-sm-6 offset-sm-3 text-center">

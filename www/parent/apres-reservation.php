@@ -4,8 +4,8 @@ ini_set("display_errors",0);error_reporting(0);
 
 session_start();
 try {
-    $bddParent = new PDO('mysql:host=localhost;dbname=parent;charset=utf8', 'root', '');
-    $bddNounou = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', '');
+    $bddParent = new PDO('mysql:host=localhost;dbname=parent;charset=utf8', 'root', 'root');
+    $bddNounou = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
     if($_SESSION['cle'] !== 0 && isset($_SESSION['cle']) && $_SESSION['statut'] === 'parent' && isset($_SESSION['statut'])) {
         $recuperation = "SELECT * FROM planning WHERE client='" . $_SESSION['cle'] . "' AND statut='reserve'";
         $resultatReservation = $bddNounou->query($recuperation)->fetchAll();
@@ -29,6 +29,7 @@ try {
         <link rel="stylesheet" href="../assets/dropdown/css/style.css">
         <link rel="stylesheet" href="../assets/socicon/css/styles.css">
         <link rel="stylesheet" href="../assets/theme/css/style.css">
+        <link rel="icon" href="../images/enfant-excite.jpg" />
         <link rel="stylesheet" href="../assets/mobirise/css/mbr-additional.css" type="text/css">
     </head>
 
@@ -103,16 +104,18 @@ try {
             <div class="row">
                 <div class="col-12">
                     <?php
-        $dia = date ("d");
-        $mes = date ("n");
-        $ano = date ("Y");
-        $dateDuJour = date_create($dia . '/' . $mes . '/' . $ano);
+        $jour = date ("d");
+        $mois = date ("n");
+        $annee = date ("Y");
+        $dateDuJour = date_create($jour . '-' . $mois . '-' . $annee);
         $dateDuJour = date_format($dateDuJour, 'm/d/Y');
             foreach ($resultatReservation as $elt) {
                 $arrayElt = explode('/', $elt['date']);
                 $dateElt = date_create($arrayElt[0] . '/' . $arrayElt[1] . '/' . $arrayElt[2]);
                 $dateElt = date_format($dateDuJour, 'm/d/Y');
                 if ($dateElt < $dateDuJour) {
+                    $recuperation = "SELECT * FROM info WHERE ID='" . $elt['ID'] . "'";
+                    $resultatNounou = $bddNounou->query($recuperation)->fetch(PDO::FETCH_ASSOC);
                     echo '<form method="post" action="validation.php">';
                     echo '<div class="row element-nounou">';
                     echo '<input type="hidden" name="heure[]" value="' . $elt['heure'] . '">';
@@ -120,7 +123,7 @@ try {
                     echo '<input type="hidden" name="nomnounou[]" value="' . $elt['ID'] . '">';
                     echo '<input type="hidden" name="prix[]" value="' . $elt['prix'] . '">';
                     echo '<div class="col-12 text-center">';
-                    echo '<p>Réservation du ' . $elt['date'] . ' à ' . $elt['heure'] . ' avec ' . $elt['ID'];
+                    echo '<p>Réservation du ' . $elt['date'] . ' à ' . $elt['heure'] . ' avec ' . $resultatNounou['prenom'] . ' ' . $resultatNounou['nom'];
                     echo '</div>';
                     echo '<div class="col-8 offset-2">';
                     echo '<label>Attribuer une note</label>';
@@ -150,7 +153,7 @@ try {
 
 
         <!-- Footer -->
-        <section once="" class="cid-qUi8DWmj62" id="footer7-9">
+        <section once="" class="cid-qUi8DWmj62" id="footer7-9" style="margin-top: 20px;">
             <div class="container">
                 <div class="media-container-row align-center mbr-white">
                     <div class="row row-links">

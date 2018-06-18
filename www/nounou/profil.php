@@ -4,7 +4,8 @@ ini_set("display_errors",0);error_reporting(0);
 
 session_start();
 try {
-    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
+    $bddGenerique = new PDO('mysql:host=localhost;dbname=generique;charset=utf8', 'root', 'root');
 
     if($_SESSION['cle'] !== 0 && isset($_SESSION['cle']) && $_SESSION['statut'] === 'nounou' && isset($_SESSION['statut'])) {
         $recuperation = "SELECT * FROM info WHERE ID='" . $_SESSION['cle'] . "'";
@@ -12,10 +13,7 @@ try {
 
         $recuperation = "SELECT * FROM salaire WHERE ID='" . $_SESSION['cle'] . "'";
         $resultatSalaire = $bdd->query($recuperation)->fetch(PDO::FETCH_ASSOC);
-    }
-} catch (Exception $e) {
-    die('Erreur : ' . $e->getMessage());
-}
+
 
 ?>
     <html>
@@ -25,6 +23,7 @@ try {
         <meta charset="UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <meta charset="utf-8">
+        <link rel="icon" href="../images/enfant-excite.jpg" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
         <link rel="stylesheet" href="../assets/tether/tether.min.css">
@@ -102,31 +101,32 @@ try {
 
         <!-- Contenu page -->
         <div style="padding-top: 100px" class="container">
-            <div class="col-12 text-center">
-                <h1>Profil</h1>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1>Profil</h1>
+                </div>
             </div>
-            <div style="padding-top: 20px" class="col-sm-4 offset-sm-4">
-                <form>
+            <div style="padding-top: 20px" class="col-8 offset-2">
+                <div class="row">
+                    <div class="col-12">
                     <?php
-                echo '<table>';
+                    echo '<img src="data:image/jpeg;base64,' . base64_encode($resultat['photo'] ) . '" height="200" width="200" class="img-thumnail" />';
+
                 foreach ($resultat as $key => $value) {
-                    echo '<tr><td>';
-                    echo $key;
-                    echo '</td><td>';
-                    echo $value;
-                    echo '<button type="button" id="' . $key . '" onclick="modification(this.id)">Modifier</button>';
-                    echo '<span id="' . $key . '1"></span>';
-                    echo '</td></tr>';
+                    if ($key !== "ID" && $key !== "photo"){
+                        echo '<br><strong>' . $key . ': </strong> ' . $value;
                     }
-                    echo '</table>';
+                }
                     echo '<h5 style="padding-top:10px" class="text-center">salaire</h5>';
-                    echo 'Vous avez travaillé ' . $resultatSalaire['nbheure'] . 'h et avez gagné ' . $resultatSalaire['salaire'] . 'euros.';
+                    if ($resultatSalaire['nbheure'] === ""){
+                        echo 'Vous avez travaillé ' . $resultatSalaire['nbheure'] . 'h et avez gagné ' . $resultatSalaire['salaire'] . 'euros.';
+                    } else {
+                        echo 'Vous n\'avez pas encore travaillé';
+                    }
                     ?>
-                        <div style="padding-top: 5px" class="text-center col-12">
-                            <input type="submit" name="modif" value="Modifier">
-                        </div>
-                </form>
+                </div>
             </div>
+        </div>
         </div>
 
         <!-- Footer -->
@@ -194,7 +194,12 @@ try {
                 </div>
             </div>
         </section>
-
+        <?php
+        }
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+        ?>
 
         <!-- Scripts -->
         <script src="assets/web/assets/jquery/jquery.min.js"></script>

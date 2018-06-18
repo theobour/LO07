@@ -268,8 +268,9 @@ class EasyWeeklyCalClass {
 
         $Output .="</tr>";
 
-        $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', '');
-        $recuperation = "SELECT date, heure, statut FROM planning WHERE ID='" . $_SESSION['cle'] . "'";
+        $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
+        $bddParent = new PDO('mysql:host=localhost;dbname=parent;charset=utf8', 'root', 'root');
+        $recuperation = "SELECT * FROM planning WHERE ID='" . $_SESSION['cle'] . "'";
         if ($resultat = $bdd->query($recuperation)) {
             $resultat = $resultat->fetchAll();
         }
@@ -286,12 +287,15 @@ class EasyWeeklyCalClass {
                 $date = $diaEnlace[$n]["dia"] . '/' . $diaEnlace[$n]["mes"] . '/' . $diaEnlace[$n]["ano"];
                 // On récupère là où l'ID est concerné
                 foreach ($resultat as $eltArray) {
+                    $test = 'a';
                     if ($eltArray['heure'] === $heure && $eltArray['date'] === $date && $eltArray['statut'] === 'libre') {
-                        $Output .= '<td style="background-color: green;">X</td>';
+                        $Output .= '<td style="background-color: #09AF00;"></td>';
                         $k = 1;
                         break;
                     } else if ($eltArray['heure'] === $heure && $eltArray['date'] === $date && $eltArray['statut'] === 'reserve') {
-                        $Output .= '<td style="background-color: red;">X</td>';
+                        $recuperation = "SELECT * FROM info WHERE ID='" . $eltArray['client'] . "'";
+                        $resultatParent = $bddParent->query($recuperation)->fetch(PDO::FETCH_ASSOC);
+                        $Output .= '<td style="background-color: #B00020; color:white; text-align: center;">' . $resultatParent['nom'] . '</td>';
                         $k = 1;
                         break;
                     }

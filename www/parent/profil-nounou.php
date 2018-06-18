@@ -5,13 +5,14 @@ ini_set("display_errors",0);error_reporting(0);
 session_start();
 
 try {
-    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', '');
-    $bddParent = new PDO('mysql:host=localhost;dbname=parent;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
+    $bddParent = new PDO('mysql:host=localhost;dbname=parent;charset=utf8', 'root', 'root');
+    $bddGenerique = new PDO('mysql:host=localhost;dbname=generique;charset=utf8', 'root', 'root');
     if (isset($_GET['nounou']) && $_GET['nounou'] !== '' && isset($_SESSION['cle']) && $_SESSION['cle'] !== '' && isset($_SESSION['statut']) && $_SESSION['statut'] === 'parent') {
         $recuperation = "SELECT * FROM info WHERE ID='" . $_GET['nounou'] . "'";
         $resultat = $bdd->query($recuperation)->fetch(PDO::FETCH_ASSOC);
 
-        $recuperation = "SELECT * FROM planning WHERE ID='" . $_GET['nounou'] . "' AND statut='libre'";
+        $recuperation = "SELECT * FROM planning WHERE ID='" . $_GET['nounou'] . "' AND statut='libre' AND date='" . $_GET['date'] . "'";
         $resultatPlanning = $bdd->query($recuperation)->fetchAll();
 
         $recuperation = "SELECT enfant FROM info WHERE ID='" . $_SESSION['cle'] . "'";
@@ -19,11 +20,7 @@ try {
 
         $recuperation = "SELECT * FROM avis WHERE ID ='" . $_GET['nounou'] ."'";
         $resultatAvis = $bdd->query($recuperation)->fetchAll();
-    }
 
-}  catch (Exception $e) {
-    die('Erreur : ' . $e->getMessage());
-}
 ?>
     <html lang="fr">
 
@@ -35,6 +32,7 @@ try {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
         <link rel="stylesheet" href="../assets/tether/tether.min.css">
+        <link rel="icon" href="../images/enfant-excite.jpg" />
         <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-grid.min.css">
         <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-reboot.min.css">
@@ -124,16 +122,40 @@ try {
         <div class="container">
             <div class="col-sm-4 offset-sm-4">
                 <?php
-                    echo '<table>';
+                echo '<img src="data:image/jpeg;base64,' . base64_encode($resultat['photo'] ) . '" height="200" width="200" class="img-thumnail" />';
+                echo '<table>';
                     foreach ($resultat as $key => $value) {
-                        echo '<tr><td>';
-                        echo $key;
-                        echo '</td><td>';
-                        echo $value;
-                        echo '</td></tr>';
+                        if ($key !== "ID" && $key !== "photo") {
+                            echo '<tr><td>';
+                            echo $key;
+                            echo '</td><td>';
+                            echo $value;
+                            echo '</td></tr>';
+                        }
                     }
                     echo '</table>';
                 ?>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Ses avis</h2>
+                </div>
+                <div style="min-height: 100px" class="col-12 text-center">
+                    <p>
+                    <?php
+                    if(!empty($resultatAvis)) {
+                        foreach ($resultatAvis as $elt) {
+                            echo 'Avis de : ' . $elt['parent'] . '<br>';
+                            echo 'Note : ' . $elt['note'] . '<br>';
+                            echo 'Avis : ' . $elt['avis'] . '<br>';
+                            echo '-----------<br>';
+                        }
+                    } else {
+                        echo 'La personne n\'a pas encore d\'avis';
+                    }
+                ?>
+                    </p>
+                </div>
             </div>
             <div style="padding-top: 20px" class="row">
                 <div class="col-12 text-center">
@@ -141,34 +163,18 @@ try {
                 </div>
                 <div class="col-sm-4 offset-sm-4">
                     <?php
-                $dia = date ("d");
-                $mes = date ("n");
-                $ano = date ("Y");
-                $date = $dia . '/' . $mes . '/' . $ano;
-                foreach ($resultatPlanning as $elt) {
-                    if ($elt['heure'] < $date){
-                        $output .= '////// <br>';
-                        $output .= $elt['heure'] . ' et ' . $elt['date'] . '<br>';
-                        $output .= '//////';
+                    $dia = date ("d");
+                    $mes = date ("n");
+                    $ano = date ("Y");
+                    $date = $dia . '/' . $mes . '/' . $ano;
+                    foreach ($resultatPlanning as $elt) {
+                        if ($elt['heure'] < $date){
+                            $output .= $elt['heure'] . ' et ' . $elt['date'] . '<br>';
+                            $output .= '------------------------<br>';
+                        }
                     }
-                }
-                echo $output;
-                ?>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h2>Ses avis</h2>
-                </div>
-                <div style="min-height: 100px" class="col-12">
-                    <?php
-                foreach ($resultatAvis as $elt) {
-                    echo 'Avis de : ' . $elt['parent'] . '<br>';
-                    echo 'Note : ' . $elt['note'] . '<br>';
-                    echo 'Avis : ' . $elt['avis'] . '<br>';
-                    echo '-----------<br>';
-                }
-                ?>
+                    echo $output;
+                    ?>
                 </div>
             </div>
             <div class="row">
@@ -200,6 +206,7 @@ try {
                             </select>
 
                     <input type="hidden" name="IDnounou" value="<?php echo $_GET['nounou']?>">
+                    <input type="hidden" name="langue" value="<?php echo $_GET['langue'] ?>">
                     <div class="col-12 text-center" style="margin-bottom: 20px;">
                         <input type="submit" name="envoi" class="btn btn-primary" value="Envoyer">
                     </div>
@@ -292,3 +299,10 @@ try {
     </body>
 
     </html>
+<?php
+    }
+
+}  catch (Exception $e) {
+    die('Erreur : ' . $e->getMessage());
+}
+?>

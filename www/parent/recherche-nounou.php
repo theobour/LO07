@@ -1,9 +1,8 @@
 <?php
 //Erreurs masquées
-ini_set("display_errors",0);error_reporting(0);
 
     session_start();
-    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
     if (isset($_SESSION['cle'])) {
         // Récupération des langues et implémentation dynamique
         $langueArray = array();
@@ -53,6 +52,7 @@ ini_set("display_errors",0);error_reporting(0);
         <title>Recherche nourrice</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="../style/style.css">
+        <link rel="icon" href="../images/enfant-excite.jpg" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
         <link rel="stylesheet" href="../assets/tether/tether.min.css">
@@ -133,15 +133,11 @@ ini_set("display_errors",0);error_reporting(0);
                 <div style="padding-top: 50px; padding-bottom: 50px" class="col-12">
                     <form method="get" action="">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-4">
                                 <label>La date : (ex 23/6/2018)</label>
-                                <input type="text" name="date">
+                                <input type="text" name="date" value="<?php echo $_GET['date'] ?>">
                             </div>
-                            <div class="col-3">
-                                <label>A partir de : (ex 11:00)</label><br>
-                                <input type="text" name="heure">
-                            </div>
-                            <div class="col-3">
+                            <div class="col-4">
                                 <label>La langue parlé</label><br>
                                 <select name="langue">
                             <option value="français">Français</option>
@@ -154,7 +150,7 @@ ini_set("display_errors",0);error_reporting(0);
                             ?>
                         </select>
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                                 <input type="submit" value="Envoyer" class="btn btn-primary">
                             </div>
                         </div>
@@ -169,7 +165,7 @@ ini_set("display_errors",0);error_reporting(0);
                foreach ($listeNounouFrancais as $elt) {
                    $recuperation = "SELECT nom,prenom,sexe,age FROM info WHERE ID='" . $elt['ID'] . "'";
                    $resultat = $bdd->query($recuperation)->fetch(PDO::FETCH_ASSOC);
-                   $output .= '<a href="profil-nounou.php?nounou=' . $elt['ID'] . '&date=' . $date . '&heure=' . $heure . '">';
+                   $output .= '<a href="profil-nounou.php?nounou=' . $elt['ID'] . '&date=' . $date . '&langue=' . $_GET['langue'] . '">';
                    $output .= '<div class="row element-nounou">';
                    $output .= '<div class="col-8">';
                    $output .= $resultat['nom'] . ' ' . $resultat['prenom'];
@@ -183,7 +179,7 @@ ini_set("display_errors",0);error_reporting(0);
             foreach ($ensembleNounou['ID'] as $key => $elt) {
                 $recuperation = "SELECT nom,prenom,sexe,age FROM info WHERE ID='" . $elt . "'";
                 $resultat = $bdd->query($recuperation)->fetch(PDO::FETCH_ASSOC);
-                $output .= '<a href="profil-nounou.php?nounou=' . $elt . '&date=' . $date . '&heure=' . $elt['heure'][$key] . '">';
+                $output .= '<a href="profil-nounou.php?nounou=' . $elt . '&date=' . $date . '&langue=' . $_GET['langue'] . '">';
                 $output .= '<div class="row element-nounou">';
                 $output .= '<div class="col-8">';
                 $output .= $resultat['nom'] . ' ' . $resultat['prenom'];

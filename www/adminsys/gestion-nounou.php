@@ -11,7 +11,7 @@ try {
         $data = htmlspecialchars($data);
         return $data;
     }
-    $bdd = new PDO('mysql:host=localhost;dbname=generique;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=generique;charset=utf8', 'root', 'root');
 
     if($_SESSION['cle'] !== 0 && isset($_SESSION['cle'])) {
         if (isset($_POST['submitcandidat']) && $_POST['submitcandidat'] !== '') {
@@ -91,6 +91,7 @@ try {
         <link rel="stylesheet" href="../assets/dropdown/css/style.css">
         <link rel="stylesheet" href="../assets/socicon/css/styles.css">
         <link rel="stylesheet" href="../assets/theme/css/style.css">
+        <link rel="icon" href="../images/enfant-excite.jpg" />
         <link rel="stylesheet" href="../assets/mobirise/css/mbr-additional.css" type="text/css">
     </head>
 

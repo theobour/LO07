@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="../assets/dropdown/css/style.css">
         <link rel="stylesheet" href="../assets/socicon/css/styles.css">
         <link rel="stylesheet" href="../assets/theme/css/style.css">
+        <link rel="icon" href="../images/enfant-excite.jpg" />
         <link rel="stylesheet" href="../assets/mobirise/css/mbr-additional.css" type="text/css">
     </head>
 

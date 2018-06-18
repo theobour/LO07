@@ -14,7 +14,8 @@ try {
         return $data;
     }
     $erreur = [];
-    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
+    $bddGenerique = new PDO('mysql:host=localhost;dbname=generique;charset=utf8', 'root', 'root');
         if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '') {
             if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '' && isset($_POST['nom']) && $_POST['nom'] !== '' && isset($_POST['prenom']) && $_POST['prenom'] !== '' && isset($_POST['nom']) && $_POST['nom'] !== '' && isset($_POST['sexe']) && $_POST['sexe'] !== '' && isset($_POST['age']) && $_POST['age'] !== '' && isset($_POST['nblangue']) && $_POST['nblangue'] !== '' && isset($_POST['ville']) && $_POST['ville'] !== '' && isset($_POST['portable']) && $_POST['portable'] !== '' && isset($_POST['presentation']) && $_POST['presentation'] !== '' && isset($_POST['experience']) && $_POST['experience'] !== '') {
                 $nom = secure_data($_POST['nom']);
@@ -24,18 +25,12 @@ try {
                 $nblangue = secure_data($_POST['nblangue']);
                 $ville = secure_data($_POST['ville']);
                 $portable = secure_data($_POST['portable']);
-                $presentation = secure_data($_POST['presentation']);
-                $experience = secure_data($_POST['experience']);
-                $update = "UPDATE info SET nom = '" . $nom . "', prenom = '" . $prenom . "', sexe = '" . $sexe . "', age = '" . $age . "', nblangue = '" . $nblangue . "', ville = '" . $ville . "', portable = '" . $portable . "', presentation = '" . $presentation . "', experience = '" . $experience . "' WHERE ID='" . $_SESSION['cle'] . "'";
+                $experience = $_POST['experience'];
+                $presentation = $_POST['presentation'];
+                $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
+                $update = "UPDATE info SET nom = '" . $nom . "', prenom = '" . $prenom . "', sexe = '" . $sexe . "', age = '" . $age . "', nblangue = '" . $nblangue . "', ville = '" . $ville . "', portable = '" . $portable . "', presentation = '" . $presentation . "', experience = '" . $experience . "', photo='" . $file . "' WHERE ID='" . $_SESSION['cle'] . "'";
                 $stmt = $bdd->prepare($update);
                 $stmt->execute();
-                /*
-                for ( $i = 0; $i < count($_POST['langue']); $i++) {
-                    $langue = $_POST['informationenfant'][$i];
-                    $sql = "INSERT INTO langue (ID, langue) VALUES ('" . $_SESSION['cle'] . "', '" . $langue . "')";
-                    $bdd->exec($sql);
-                }
-                */
                 foreach ($_POST['langue'] as $elt) {
                     $elt = secure_data($elt);
                     $sql = "INSERT INTO langue (ID, langue) VALUES ('" . $_SESSION['cle'] . "', '" . $elt . "')";
@@ -70,6 +65,7 @@ try {
         <link rel="stylesheet" href="../assets/socicon/css/styles.css">
         <link rel="stylesheet" href="../assets/theme/css/style.css">
         <link rel="stylesheet" href="../assets/mobirise/css/mbr-additional.css" type="text/css">
+        <link rel="icon" href="../images/enfant-excite.jpg" />
     </head>
 
     <body>
@@ -132,7 +128,7 @@ try {
                     <h1 class="text-center">Inscription</h1>
                 </div>
                 <div class="col-12">
-                    <form method="post" action="">
+                    <form method="post" action="" enctype="multipart/form-data">
                         <div class="col-sm-6 offset-sm-3 text-center">
 
                             <label for="mail2">Nom</label>
@@ -156,7 +152,7 @@ try {
                             <div class="col-4 offset-4">
                                 <input type="number" name="age" id="mdp2" class="form-control">
                             </div>
-                            <label for="mdp">Nombre de langues parlées</label>
+                            <label for="mdp">Nombre de langues étrangères parlées</label>
                             <div class="row">
                                 <div style="padding-top: 5px" class="col-8">
                                     <input type="number" name="nblangue" id="nblangue" class="form-control">
@@ -164,10 +160,8 @@ try {
                                 <div class="col-4">
                                     <button style="padding-left: 20px; padding-right: 20px;" type="button" id="btnajoutlangue" class="btn btn-primary">Go</button>
                                 </div>
-                                <div class="row">
-                                    <span id="ajoutlangue"></span>
-                                </div>
                             </div>
+                            <span id="ajoutlangue"></span>
 
                             <label for="mdp">Votre ville</label>
                             <input type="text" name="ville" id="mdp" class="form-control">
@@ -176,7 +170,7 @@ try {
                             <input type="number" name="portable" id="mdp2" class="form-control">
 
                             <label for="mdp2">Votre photo</label>
-                            <input type="file" name="photo" id="mdp2" class="form-control">
+                            <input type="file" name="image" id="image" class="form-control">
                             <div class="col-12">
                                 <label for="mdp2">Presentation</label>
                             </div>

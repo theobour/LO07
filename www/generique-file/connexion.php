@@ -1,7 +1,4 @@
 <?php
-//Erreurs masquées
-ini_set("display_errors",0);error_reporting(0);
-
 session_start();
 //Le pseudo vérifier qu'il n'a pas été utilisé
 //Le mail vérifier qu'il est correct
@@ -17,7 +14,7 @@ try {
         return $data;
     }
 
-    $bdd = new PDO('mysql:host=localhost;dbname=generique;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=generique;charset=utf8', 'root', 'root');
     if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '' && isset($_SESSION['statut']) && $_SESSION['statut'] !== '') {
         if ($_SESSION['statut'] === 'nounou') { // nounou -> planning.html
             header('Location: ../nounou/planning.php');
@@ -88,6 +85,7 @@ try {
         <link rel="stylesheet" href="../assets/dropdown/css/style.css">
         <link rel="stylesheet" href="../assets/socicon/css/styles.css">
         <link rel="stylesheet" href="../assets/theme/css/style.css">
+        <link rel="icon" href="../images/enfant-excite.jpg" />
         <link rel="stylesheet" href="../assets/mobirise/css/mbr-additional.css" type="text/css">
     </head>
 

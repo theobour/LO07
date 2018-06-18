@@ -22,7 +22,7 @@ function modification(id) {
 /*==============================
         Ajout enfant
 ================================ */
-if (url === "/LO07/www/parent/enregistrement-profil.php") {
+if (url === "/www/parent/enregistrement-profil.php") {
     let btnAjoutEnfant = document.getElementById('btnajout');
 
     btnAjoutEnfant.addEventListener('click', function () {
@@ -45,18 +45,20 @@ if (url === "/LO07/www/parent/enregistrement-profil.php") {
     Ajout langue
 ================================ */
 console.log(url);
-if (url === "/LO07/www/nounou/enregistrement-profil.php") {
+if (url === "/www/nounou/enregistrement-profil.php") {
     console.log("ok");
     let btnAjoutLangue = document.getElementById('btnajoutlangue');
     btnAjoutLangue.addEventListener('click', function () {
-        let nb = document.getElementById('nblangue').value;
+        let nb = parseInt(document.getElementById('nblangue').value);
+        nb = nb + 1;
         let message = "";
-        message += '<label>Langue :</label>';
-        message += '<input name="langue[]" type="text" class="form-control">';
         var i;
-        for (i = 0; i < nb; i++) {
-            var champAjout = document.getElementById("ajoutlangue");
-            champAjout.innerHTML += message;
+        var champAjout = document.getElementById("ajoutlangue");
+        for (i = 1; i < nb; i++) {
+            console.log(i);
+            message += '<label>Langue ' + i + ' :</label>';
+            message += '<input name="langue[]" type="text" class="form-control">';
         }
+        champAjout.innerHTML += message;
     });
 }

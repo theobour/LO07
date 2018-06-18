@@ -3,7 +3,7 @@
 ini_set("display_errors",0);error_reporting(0);
 
 session_start();
-$bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', '');
+$bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
 if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '' && isset($_SESSION['statut']) && $_SESSION['statut'] === 'nounou' && $_POST['envoi'] !== '') {
     ///////
 }
@@ -19,6 +19,7 @@ if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '' && isset($_SESSION['statu
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
         <link rel="stylesheet" href="../assets/tether/tether.min.css">
+        <link rel="icon" href="../images/enfant-excite.jpg" />
         <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-grid.min.css">
         <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-reboot.min.css">
@@ -168,7 +169,7 @@ if (isset($_SESSION['cle']) && $_SESSION['cle'] !== '' && isset($_SESSION['statu
             </form>
 
             <div class="row">
-                <div class="col-12">
+                <div class="col-12" style="margin-bottom: 40px;">
                     <span id="calendrier1"></span>
                 </div>
             </div>

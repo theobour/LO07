@@ -19,8 +19,8 @@ try {
         return $data;
     }
 
-    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', '');
-    $bddGenerique = new PDO('mysql:host=localhost;dbname=generique;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=nounou;charset=utf8', 'root', 'root');
+    $bddGenerique = new PDO('mysql:host=localhost;dbname=generique;charset=utf8', 'root', 'root');
     // On vérifie l'envoie
     if (isset($_POST['submit'])) {
         //  On vérifie que les variables ont toutes été rentré
@@ -92,6 +92,7 @@ try {
         <link rel="stylesheet" href="../assets/dropdown/css/style.css">
         <link rel="stylesheet" href="../assets/socicon/css/styles.css">
         <link rel="stylesheet" href="../assets/theme/css/style.css">
+        <link rel="icon" href="../images/enfant-excite.jpg" />
         <link rel="stylesheet" href="../assets/mobirise/css/mbr-additional.css" type="text/css">
     </head>
 
