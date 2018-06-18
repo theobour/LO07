@@ -10,3 +10,42 @@
     margin-top: 15px;
 }
 
+.bleu {
+    background-color: lightskyblue;
+}
+
+.rose {
+    background-color: cornsilk;
+}
+
+.centrer {
+    text-align: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bas_long {
+    padding-bottom: 150px;
+}
+
+.fond_gris {
+    background-color: gainsboro;
+}
+
+.bottom {
+    bottom: 40px;
+    position: absolute;
+}
+
+.fond {
+    background-image: url(../images/background_transparent.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed center;
+    background-size: cover;
+}
+
+.footer {
+    bottom: 0;
+    width: 100%;
+}
